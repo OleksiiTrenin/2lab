@@ -57,7 +57,7 @@ button {
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: transform 0.1s, box-shadow 0.2s, background 0.3s ease; /* Додаємо анімацію для фону */
+    transition: transform 0.1s, box-shadow 0.2s, background 0.3s ease; 
 }
 
 button:hover {
