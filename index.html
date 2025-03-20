@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гра на Canvas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Гра: PILOT </h1>
+    </header>
+    <main>
+        <section id="game-screen">
+            <div id="game-container">
+                <canvas id="gameCanvas" width="400" height="600"></canvas>
+                <div id="controls">
+                    <button id="left-btn">LEFT</button>
+                    <button id="right-btn">RIGHT</button>
+                    <button id="start-btn">Start</button>
+                    <button id="end-btn" style="display: none;">End</button>
+                </div>
+            </div>
+            <div id="score">Очки: <span id="score-value">0</span></div>
+            <div id="prev-score">Передостанній результат: <span id="prev-score-value">Немає</span></div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
