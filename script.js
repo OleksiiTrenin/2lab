@@ -31,11 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
     skyImg.src = 'images/sky.png';
     const explosionImg = new Image();
     explosionImg.src = 'images/explosion.png';
-    const birdImg = new Image();
-    birdImg.src = 'images/bird.png';
 
     let imagesLoaded = 0;
-    const totalImages = 5;
+    const totalImages = 4;
 
     function checkImagesLoaded() {
         imagesLoaded++;
@@ -52,8 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
     skyImg.onerror = () => { console.error('Помилка завантаження sky.png'); checkImagesLoaded(); };
     explosionImg.onload = checkImagesLoaded;
     explosionImg.onerror = () => { console.error('Помилка завантаження explosion.png'); checkImagesLoaded(); };
-    birdImg.onload = checkImagesLoaded;
-    birdImg.onerror = () => { console.error('Помилка завантаження bird.png'); checkImagesLoaded(); };
 
     startBtn.disabled = true;
 
@@ -105,19 +101,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function spawnObstacle() {
         const x = Math.random() * (canvas.width - 30);
-        const type = Math.random() < 0.7 ? 'wall' : 'bird';
-        if (type === 'wall') 
-            obstacles.push({ 
-                x: x, 
-                y: 0, 
-                width: 40, 
-                height: 40, 
-                hitboxWidth: 30,
-                hitboxHeight: 30,
-                speed: 3,
-                type: 'wall'
-            });
-        
+        obstacles.push({ 
+            x: x, 
+            y: 0, 
+            width: 40, 
+            height: 40, 
+            hitboxWidth: 30,
+            hitboxHeight: 30,
+            speed: 3,
+            type: 'wall'
+        });
     }
 
     function gameLoop() {
@@ -158,27 +151,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         obstacles.forEach((obstacle, index) => {
-            if (obstacle.type === 'wall') {
-                obstacle.y += obstacle.speed;
-            } else if (obstacle.type === 'bird') {
-                obstacle.y += obstacle.speed;
-                obstacle.x = obstacle.x + Math.sin(obstacle.y * obstacle.frequency) * obstacle.amplitude;
-            }
+            obstacle.y += obstacle.speed;
 
-            if (obstacle.type === 'wall') {
-                if (wallImg.complete && wallImg.naturalWidth !== 0) {
-                    ctx.drawImage(wallImg, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
-                } else {
-                    ctx.fillStyle = 'red';
-                    ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
-                }
-            } else if (obstacle.type === 'bird') {
-                if (birdImg.complete && birdImg.naturalWidth !== 0) {
-                    ctx.drawImage(birdImg, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
-                } else {
-                    ctx.fillStyle = 'gray';
-                    ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
-                }
+            if (wallImg.complete && wallImg.naturalWidth !== 0) {
+                ctx.drawImage(wallImg, obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+            } else {
+                ctx.fillStyle = 'red';
+                ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
             }
 
             if (!explosion && checkCollision(player, obstacle)) {
